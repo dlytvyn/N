@@ -8,3 +8,10 @@ class Board:
         self.g = parent.g + 1 if parent else 0
         self.h = 0
         self.f = 0
+
+    def __lt__(self, new):
+        if self.f == new.f:
+            if self.h == new.h:
+                return self.g < new.g
+            return self.h < new.h
+        return self.f < new.f
