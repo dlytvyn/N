@@ -38,14 +38,14 @@ class Solver:
                             self.complexity_in_size += 1
 
     def print_result(self, board, size):
-        iter = 0
-        while board.parent:
-            print('Step = ', iter)
-            iter += 1
-            for i in range(size):
-                print(board.board[i * size: size * (i + 1)])
-            print('\n-------------------------')
-            board = board.parent
-        print('Step = ', iter)
+        self.print_stack(board, size)
+        print('\nComplexity in size = ', self.complexity_in_size)
+        print('Complexity in time = ', self.closed.__len__())
+        print('Total number of moves = ', board.g)
+
+    def print_stack(self, board, size):
+        if board.parent:
+            self.print_result(board.parent, size)
+        print('\n------- Step = ', board.g, ' -------')
         for i in range(size):
-            print(self.puzzle.parent.board[i * size: size * (i + 1)])
+            print(board.board[i * size: size * (i + 1)])
