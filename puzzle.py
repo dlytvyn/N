@@ -1,20 +1,20 @@
-from heuristics import manhattan_distance, heuristics
+from heuristics import heuristics
 from board import Board
+from parser_file import Parser
 
 
-class Puzzle:
-    def __init__(self, size, board):
-        self.size = size
-        self.length = size * size
-        self.board = board
-        self.parent = Board(board)
-        self.usual_puzzle = board.copy()
+class Puzzle(Parser):
+    def __init__(self):
+        super().__init__()
+        self.length = self.size * self.size
+        self.parent = Board(self.board)
+        self.usual_puzzle = self.board.copy()
         self.usual_puzzle.sort()
         self.usual_puzzle.append(self.usual_puzzle.pop(0))
         self.target = [0 for i in range(self.length)]
         self.target_puzzle()
+        self.target_dict = {item: i for i, item in enumerate(self.target)}
         self.possible_moves = self.search_moves()
-        self.heuristics = heuristics[1]
 
     def target_puzzle(self):
         i, j = 0, 0
@@ -46,12 +46,8 @@ class Puzzle:
         return possible_moves
 
     def get_h(self, board, target_puzzle):
-        return self.heuristics(self.size, board, target_puzzle)
+        return heuristics[self.heuristics](self.size, board, target_puzzle)
 
     def get_heuristic_coef(self, board):
         board.h = self.get_h(board.board, self.target)
         board.f = board.g + board.h
-
-# a = Puzzle(3, [1, 2, 3, 4, 5, 6, 7, 8, 0])
-# a.target_puzzle()
-# print(a.target)

@@ -45,7 +45,7 @@ class Solver:
 
     def print_stack(self, board, size):
         if board.parent:
-            self.print_result(board.parent, size)
+            self.print_stack(board.parent, size)
         print('\n------- Step = ', board.g, ' -------')
         for i in range(size):
             print(board.board[i * size: size * (i + 1)])
