@@ -1,4 +1,3 @@
-from heuristics import heuristics
 from board import Board
 from parser_file import Parser
 

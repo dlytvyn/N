@@ -1,6 +1,3 @@
-import math
-
-
 def manhattan_distance(size, board, target):
     distances = []
     for i in range(size * size):
@@ -14,8 +11,6 @@ def euclidean_distance(size, board, target):
     distances = []
     for i in range(size * size):
         if not board[i] == target[i] and not board[i] == 0:
-            # distances.append(math.pow((target.index(board[i]) // size - i // size) +
-            #                           (target.index(board[i]) % size - i % size), 2))
             dy = abs(target.index(board[i]) // size - i // size)
             dx = abs(target.index(board[i]) % size - i % size)
             distances.append(dx * dx + dy * dy)
@@ -26,8 +21,8 @@ def chebyshev_distance(size, board, target):
     distances = []
     for i in range(size * size):
         if not board[i] == target[i] and not board[i] == 0:
-            distances.append(max((target.index(board[i]) // size - i // size),
-                                 (target.index(board[i]) % size - i % size)))
+            distances.append(max(abs(target.index(board[i]) // size - i // size),
+                                 abs(target.index(board[i]) % size - i % size)))
     return sum(distances)
 
 
