@@ -46,7 +46,7 @@ class Puzzle(Parser):
         return possible_moves
 
     def get_h(self, board, target_puzzle):
-        return heuristics[self.heuristics](self.size, board, target_puzzle)
+        return self.heuristics(self.size, board, target_puzzle)
 
     def get_heuristic_coef(self, board):
         board.h = self.get_h(board.board, self.target)
