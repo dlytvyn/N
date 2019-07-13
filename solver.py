@@ -42,7 +42,6 @@ class Solver:
         print('\nComplexity in size = ', self.complexity_in_size)
         print('Complexity in time = ', self.closed.__len__())
         print('Total number of moves = ', board.g)
-     #   print('Heuristic function: ', self.puzzle.heuristics)
 
     def print_stack(self, board, size):
         if board.parent:

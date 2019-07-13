@@ -11,10 +11,16 @@ class Parser:
         self.board = None
         self.size = None
         self.heuristics = heuristics[self.arguments.heuristic_number]
+
         if self.arguments.random_size:
             self.generate_random_map()
         elif self.arguments.file:
             self.parse_file(self.arguments.file.name)
+        else:
+            print('Usage:', self.show_usage())
+            exit(0)
+        if self.arguments.file and not self.heuristics:
+            self.heuristics = 2
         if not self.is_solvable():
             print('This puzzle is not solvable!')
             sys.exit(0)
@@ -46,7 +52,7 @@ class Parser:
         main.py
         arguments:
             -f File
-            -r Number (Number is the size of the map)
+            -r Number (Number is the size of random map)
         heuristics:
             -h [1, 2, 3] (default is 1), where
                 1: Manhattan distance
