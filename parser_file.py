@@ -11,7 +11,9 @@ class Parser:
         self.board = None
         self.size = None
         self.heuristics = heuristics[self.arguments.heuristic_number]
+        self.validate()
 
+    def validate(self):
         if self.arguments.random_size:
             self.generate_random_map()
         elif self.arguments.file:
@@ -54,10 +56,11 @@ class Parser:
             -f File
             -r Number (Number is the size of random map)
         heuristics:
-            -h [1, 2, 3] (default is 1), where
+            -h [1, 2, 3, 4] (default is 1), where
                 1: Manhattan distance
                 2: Euclidean distance (squared)
                 3: Chebyshev distance
+                4: Outta place heuristic
         ''')
 
     def generate_random_map(self):
@@ -83,7 +86,7 @@ class Parser:
                                 formatter_class=RawTextHelpFormatter)
         parser.add_argument('-f', type=FileType(), dest='file')
         parser.add_argument('-h', type=int,
-                            choices=[1, 2, 3], action="store",
+                            choices=[1, 2, 3, 4], action="store",
                             dest="heuristic_number", default=1)
         parser.add_argument('-r', type=self.validate_size,
                             dest="random_size", required=False)

@@ -2,11 +2,20 @@ from board import Board
 from parser_file import Parser
 
 
-class Puzzle(Parser):
-    def __init__(self):
-        super().__init__()
+class Puzzle():
+    def __init__(self, size, heuristics, board):
+        self.board = board.board
+        self.size = size
+        self.heuristics = heuristics
         self.length = self.size * self.size
-        self.parent = Board(self.board)
+        self.parent = board
+        self.usual_puzzle = None
+        self.target = None
+        self.target_dict = None
+        self.possible_moves = None
+        self.set_data()
+
+    def set_data(self):
         self.usual_puzzle = self.board.copy()
         self.usual_puzzle.sort()
         self.usual_puzzle.append(self.usual_puzzle.pop(0))
